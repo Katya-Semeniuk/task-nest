@@ -8,13 +8,25 @@
   min-height: 100vh;
 }
 
-
-.Applink {
-  color: #61dafb;
+.Main{
+  padding: 20px 0;
 }
 
+a{
+  color: #252B42;
+}
+
+a:hover {
+  /* color: #252B42; */
+  color: #0f1119;
+  text-decoration: none;
+}
+/* .Applink {
+  color: #61dafb;
+} */
+
 a:hover i {
-  color:  #FF4E50;
+  color:  #FA4A0C;
   transition: color ease-in-out 0.3s;
 }
 
@@ -28,5 +40,12 @@ i {
 i:hover {
   cursor: pointer;
   transition: color ease-in-out 0.3s;
-  color: #FF4E50;
+  color: #FA4A0C;
+}
+
+
+img{
+  display: block;
+  width: 100%;
+  max-width: 100%;
 }

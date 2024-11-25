@@ -1,0 +1,9 @@
+.ImageWrapper{
+    max-height: 80vh;
+    max-width: 80vh;
+    margin: 0 auto;
+}
+
+.Image {
+    object-fit: contain;
+  }

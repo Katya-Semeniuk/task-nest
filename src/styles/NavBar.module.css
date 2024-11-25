@@ -1,0 +1,8 @@
+.NavLink{
+    padding: 5px;
+}
+
+.Active i{
+    color:  #FA4A0C;
+    transition: color ease-in-out 0.3s;
+}
