@@ -6,4 +6,29 @@
 
 .Image {
     object-fit: contain;
+    width: 100%;
+    height: 100%;
   }
+
+  .NavLink{
+   font-size: 0.8rem; 
+   border-radius: 25px;
+   padding: 10px 15px;
+   margin-left: 10px;
+   min-width: 75px;
+   background-color: #FA4A0C;
+   color: #fff;
+   transition: all 0.3s ease-in-out;
+  }
+
+  .NavLink:hover,
+  .NavLink:focus{
+    color:  #FA4A0C;
+    background-color:  #fff;
+    outline: 1px solid #FA4A0C;
+    cursor: pointer;
+   }
+
+   
+
+  

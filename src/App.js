@@ -7,6 +7,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import TasksList from './components/TasksList';
 import NotFound from './pages/NotFound';
+import "./axios/axiosDefault";
 
 function App() {
   return (

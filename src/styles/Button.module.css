@@ -1,0 +1,67 @@
+.Button {
+  font-size: 0.9rem;
+  align-self: center;
+  border-radius: 100px;
+ border: none;
+  padding: 4px 10px;
+  margin-left: 2px;
+  margin-right: 2px;
+  min-width: 75px;
+  }
+
+.Button:hover {
+    cursor: pointer;
+  }
+
+  .Button:hover:active {
+    background-color: #ee450a !important;
+  }
+  
+  .Button:active {
+    background-color: #ee450a !important;
+  }
+  
+  .Button:focus {
+    background-color: #ee450a;
+  }
+  
+  .Wide {
+    padding: 10px 50px;
+    width: 100%;
+  }
+  
+  .Orange,
+  .OrangeOutline:hover,
+  .Bright:hover {
+    background-color:  #ee450a;
+    color: #ffffff;
+  }
+  
+  .OrangeOutline,
+  .Orange:hover {
+    /* border: 1px solid #2142b2; */
+    background-color: #ffffff;
+    color: #2142b2;
+  }
+  
+  .Black,
+  .BlackOutline:hover {
+    /* background-color: #242a3d;
+    color: white; */
+    background-color: #242a3d;
+    color: aliceblue;
+  }
+  
+  .Black:hover,
+  .BlackOutline {
+    /* background-color: #dadadf;
+    color: #242a3d;
+    border-color: #242a3d; */
+    background-color: aliceblue;
+    color: #242a3d;
+  }
+  
+  .Bright {
+    background-color: #FA4A0C;
+    color: #fff;
+  }

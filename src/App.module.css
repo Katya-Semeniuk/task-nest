@@ -14,12 +14,12 @@
 
 a{
   color: #252B42;
+  transition: color ease-in-out 0.3s;
 }
 
 a:hover {
-  /* color: #252B42; */
-  color: #0f1119;
-  text-decoration: none;
+color: #0f1119;
+text-decoration: none;
 }
 /* .Applink {
   color: #61dafb;
@@ -44,8 +44,3 @@ i:hover {
 }
 
 
-img{
-  display: block;
-  width: 100%;
-  max-width: 100%;
-}
