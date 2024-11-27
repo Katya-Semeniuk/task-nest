@@ -6,3 +6,8 @@
     color:  #FA4A0C;
     transition: color ease-in-out 0.3s;
 }
+
+.LogoWrapper{
+    max-height: 30vh;
+    max-width: 20vh;
+}

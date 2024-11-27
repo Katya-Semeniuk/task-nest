@@ -1,6 +1,8 @@
 import {Navbar, Container, Nav} from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
+import logo from '../assets/logo-1.png';
 import styles from '../styles/NavBar.module.css';
+import appStyles from '../App.module.css';
 
 
 const NavBar = () => {
@@ -8,7 +10,10 @@ const NavBar = () => {
       <Navbar bg="light" expand="md">
         <Container>
         <NavLink to='/' className={styles.NavLink} activeClassName={styles.Active}>
-        <Navbar.Brand >TaskNest</Navbar.Brand>
+        <Navbar.Brand >
+        <div className={styles.LogoWrapper}>
+        <img src={logo} alt="Logo" className={appStyles.Image}/>
+        </div></Navbar.Brand>
         </NavLink >
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

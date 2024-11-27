@@ -4,11 +4,6 @@
     margin: 0 auto;
 }
 
-.Image {
-    object-fit: contain;
-    width: 100%;
-    height: 100%;
-  }
 
   .NavLink{
    font-size: 0.8rem; 
