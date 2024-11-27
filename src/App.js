@@ -1,4 +1,3 @@
-import { createContext, useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import styles from "./App.module.css";
@@ -8,32 +7,12 @@ import SignUp from './pages/SignUp';
 import TasksList from './components/TasksList';
 import NotFound from './pages/NotFound';
 import "./api/axiosDefault";
-import axios from "axios";
 
 
-export const CurrentUserContext = createContext();
-export const SetCurrentUserContext = createContext();
 
 function App() {
 
-  const [currentUser, setCurrentUser] = useState(null);
-
-  const fetchUser = async () => {
-    try {
-      const { data } = await axios.get("dj-rest-auth/user/");
-      setCurrentUser(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
-
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-       <SetCurrentUserContext.Provider value={setCurrentUser}>
     <div className={styles.App}>
       <NavBar />
       <Container className={styles.Main}>
@@ -66,8 +45,6 @@ function App() {
       </Container>
 
     </div>
-    </SetCurrentUserContext.Provider>
-    </CurrentUserContext.Provider>
   );
 }
 
