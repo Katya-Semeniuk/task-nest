@@ -3,17 +3,16 @@ import { Link, useHistory } from "react-router-dom";
 
 import styles from "../styles/SignInUpForm.module.css";
 import btnStyles from "../styles/Button.module.css";
-import appStyles from "../App.module.css";
 
 import {
   Form,
   Button,
-  Image,
   Col,
   Row,
   Container,
   Alert,
 } from "react-bootstrap";
+
 import axios from "axios";
 
 const SignUpForm = () => {
@@ -46,9 +45,9 @@ const SignUpForm = () => {
   };
 
   return (
-    <Row className={styles.Row}>
-      <Col className="my-auto py-2 p-md-2" md={6}>
-        <Container className={`${appStyles.Content} p-4 `}>
+    <Row className={styles.Row} >
+      <Col xs={12} md={8} lg={6} className="mx-auto py-2">
+        <Container className="p-4">
           <h1 className={styles.Header}>sign up</h1>
 
           <Form onSubmit={handleSubmit}>
@@ -64,9 +63,9 @@ const SignUpForm = () => {
               />
             </Form.Group>
             {errors.username?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
+              <p className={styles.Alert}  key={idx}>
                 {message}
-              </Alert>
+              </p>
             ))}
 
             <Form.Group controlId="password1" className="mb-4">
@@ -81,9 +80,9 @@ const SignUpForm = () => {
               />
             </Form.Group >
             {errors.password1?.map((message, idx) => (
-              <Alert key={idx} variant="warning">
+              <p  className={`${styles.Alert} mb-2`} key={idx} >
                 {message}
-              </Alert>
+              </p>
             ))}
 
             <Form.Group controlId="password2"  className="mb-4">
@@ -98,9 +97,9 @@ const SignUpForm = () => {
               />
             </Form.Group>
             {errors.password2?.map((message, idx) => (
-              <Alert key={idx} variant="warning">
+              <p className={styles.Alert} key={idx} >
                 {message}
-              </Alert>
+              </p>
             ))}
 
             <Button
@@ -117,20 +116,11 @@ const SignUpForm = () => {
           </Form>
         </Container>
 
-        <Container className={`mt-3 ${appStyles.Content}`}>
+        <Container className="mt-3">
           <Link className={styles.Link} to="/signin">
             Already have an account? <span>Sign in</span>
           </Link>
         </Container>
-      </Col>
-      <Col
-        md={6}
-        className={`my-auto d-none d-md-block p-2 ${styles.SignUpCol}`}
-      >
-        <Image
-          className={`${appStyles.FillerImage}`}
-          src={"https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero2.jpg"}
-        />
       </Col>
     </Row>
   );

@@ -1,11 +1,8 @@
 .Button {
-  font-size: 0.9rem;
-  align-self: center;
-  border-radius: 100px;
+  font-size: 1.0rem;
+  border-radius: 25px;
  border: none;
   padding: 4px 10px;
-  margin-left: 2px;
-  margin-right: 2px;
   min-width: 75px;
   }
 

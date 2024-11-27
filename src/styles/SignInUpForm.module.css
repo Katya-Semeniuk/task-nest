@@ -1,20 +1,21 @@
 .Row {
     height: calc(100vh - 50px);
   }
+
   .Input {
     display: block;
     background: #ffffff;
     border: 1px solid #d7d8e1;
-    border-radius: 15px;
+    border-radius: 25px;
     color: #0f1119;;
     text-align: center;
   }
   
   .Header {
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     font-weight: bold;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: 24px;
+    line-height: 1.2;
     text-align: center;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -30,13 +31,15 @@
   
   .Link span {
     color: #ff9254;
+    font-size: 0.9rem;
   }
   
-  .Container {
-    padding: 30px 10px;
+  .Alert{
+    color: red;
+    font-size: 1.0rem;
+    width: 100%;
+    text-align: center;
   }
   
-  .SignInCol {
-    height: 320px;
-  }
+ 
   
