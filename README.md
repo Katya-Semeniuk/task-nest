@@ -73,3 +73,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 React Bootstrap https://react-bootstrap-v4.netlify.app/
 Logo https://turbologo.com/app
+React Icons https://react-icons.github.io/react-icons/

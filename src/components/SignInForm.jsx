@@ -11,7 +11,6 @@ import {
   Col,
   Row,
   Container,
-  Alert,
 } from "react-bootstrap";
 
 import axios from "axios";
@@ -96,9 +95,7 @@ const SignInForm = () => {
               Sign in
             </Button>
             {errors.non_field_errors?.map((message, idx) => (
-              <Alert key={idx} variant="warning" className="mt-3">
-                {message}
-              </Alert>
+              <p className={`${styles.Alert} mt-3`} key={idx} >{message}</p>
             ))}
           </Form>
         </Container>
