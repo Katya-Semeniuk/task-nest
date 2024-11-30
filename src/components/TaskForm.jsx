@@ -71,7 +71,6 @@ function TaskForm() {
   const handleMultiSelect = (e) => {
     const selectedOptions = Array.from(
       e.target.selectedOptions,
-      // (option) => option.textContent 
       (option) => option.value
     );
     setCreateTaskData((prev) => ({
