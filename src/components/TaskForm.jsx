@@ -3,18 +3,22 @@ import { Container, Form, Button, Col, Row } from "react-bootstrap";
 import styles from "../styles/TaskForm.module.css";
 import btnStyles from "../styles/Button.module.css";
 import { MdOutlineLibraryAdd } from "react-icons/md";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
-import axios from "axios";
+import { axiosReq } from "../api/axiosDefault";
+import { useHistory } from "react-router";
+
 
 function TaskForm() {
+  const [errors, setErrors] = useState({});
   const [createTaskData, setCreateTaskData] = useState({
     title: "",
     description: "",
     due_date: "",
     priority: "medium",
     category: "work",
-    status: "not started",
-    assigned_to: [], // Масив для призначення користувачів
+    status: "not-started",
+    assigned_to: [], 
   });
 
   const {
@@ -24,8 +28,10 @@ function TaskForm() {
     priority,
     category,
     status,
-    assigned_to,
+    assigned_to
   } = createTaskData;
+
+  const history = useHistory();
 
   const handleChange = (event) => {
     setCreateTaskData({
@@ -36,16 +42,36 @@ function TaskForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("due_date", due_date);
+    formData.append("priority", priority);
+    formData.append("category", category);
+    formData.append("status", status);
+    formData.append("assigned_to", assigned_to);
+    
+    for (let pair of formData.entries()) {
+      console.log(`${pair[0]}: ${pair[1]}`);
+    }
+
     try {
-      await axios.post("/dj-rest-auth/tasks/create/", createTaskData);
+      const {data} = await axiosReq.post("/tasks/", formData);
+      history.push(`/tasks/${data.id}`);
     } catch (err) {
       console.log(err);
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
+      }
     }
   };
 
   const handleMultiSelect = (e) => {
     const selectedOptions = Array.from(
       e.target.selectedOptions,
+      // (option) => option.textContent 
       (option) => option.value
     );
     setCreateTaskData((prev) => ({
@@ -57,6 +83,8 @@ function TaskForm() {
   return (
     <Container>
       <div className={styles.Container}>
+        <button className={styles.Btn} onClick={() => history.goBack()}> <IoMdArrowRoundBack />Go back</button>
+        <h2 className={styles.Title} >Create a task</h2>
         <Form onSubmit={handleSubmit}>
           <Row className="mb-3">
             <Col>
@@ -71,6 +99,11 @@ function TaskForm() {
                   required
                 />
               </Form.Group>
+              {errors.title?.map((message, idx) => (
+              <p className={styles.Alert}  key={idx}>
+                {message}
+              </p>
+            ))}
             </Col>
           </Row>
 
@@ -89,6 +122,11 @@ function TaskForm() {
                   style={{ resize: 'none' }}
                 />
               </Form.Group>
+              {errors.description?.map((message, idx) => (
+              <p className={styles.Alert}  key={idx}>
+                {message}
+              </p>
+            ))}
             </Col>
           </Row>
 
@@ -173,28 +211,28 @@ function TaskForm() {
                   <Form.Check
                     inline
                     type="radio"
-                    label="NOT-STARTED"
+                    label="Not-started"
                     name="status"
-                    value="not started"
-                    checked={status === "not started"}
+                    value="not-started"
+                    checked={status === "not-started"}
                     onChange={handleChange}
                   />
                   <Form.Check
                     inline
                     type="radio"
-                    label="IN-PROGRESS"
+                    label="In-progress"
                     name="status"
-                    value="in-rpogress"
-                    checked={status === "in-rpogress"}
+                    value="in-progress"
+                    checked={status === "in-progress"}
                     onChange={handleChange}
                   />
                   <Form.Check
                     inline
                     type="radio"
-                    label="COMPLETE"
+                    label="Complete"
                     name="status"
-                    value="completed"
-                    checked={status === "completed"}
+                    value="complete"
+                    checked={status === "complete"}
                     onChange={handleChange}
                   />
                 </div>
@@ -213,6 +251,11 @@ function TaskForm() {
                   onChange={handleChange}
                 />
               </Form.Group>
+              {errors.due_date?.map((message, idx) => (
+              <p className={styles.Alert}  key={idx}>
+                {message}
+              </p>
+            ))}
             </Col>
           </Row>
 
@@ -227,9 +270,9 @@ function TaskForm() {
                   onChange={handleMultiSelect}
                 >
                   {/* Припустимо, список користувачів передається через пропс users */}
-                  <option value="1">User 1</option>
-                  <option value="2">User 2</option>
-                  <option value="3">User 3</option>
+                  <option value="1" >superuser</option>
+                  <option value="2"  >username</option>
+                  <option value="3" >т</option>
                 </Form.Control>
               </Form.Group>
             </Col>

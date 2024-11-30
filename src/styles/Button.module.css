@@ -18,9 +18,9 @@
     background-color: #ee450a !important;
   }
   
-  .Button:focus {
+  /* .Button:focus {
     background-color: #ee450a;
-  }
+  } */
   
   .Wide {
     padding: 12px 50px;
@@ -71,4 +71,8 @@ background-color: #3E85F3;
   .Bright {
     background-color: #FA4A0C;
     color: #fff;
+  }
+
+  .Bright:focus {
+    background-color: #ee450a;
   }
