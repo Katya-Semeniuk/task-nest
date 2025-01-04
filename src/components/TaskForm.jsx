@@ -305,9 +305,7 @@ function TaskForm() {
                   name="assigned_to"
                   onChange={handleMultiSelect}
                 >
-                  {/* <option value="1" >superuser</option>
-                  <option value="2"  >username</option>
-                  <option value="3" >т</option> */}
+        
                  { assignedUsers.length > 0 && assignedUsers.map((user) => (
                   <option key={user.id} value={user.id}>
                     {user.owner}

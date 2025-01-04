@@ -4,9 +4,11 @@ import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-import Tasks from "./pages/Tasks";
+import CreateTask from "./pages/CreateTask";
 import NotFound from './pages/NotFound';
+import TaskPage from "./pages/TaskPage";
 import "./api/axiosDefault";
+
 
 
 
@@ -35,7 +37,12 @@ function App() {
           <Route
             exact
             path="/tasks/create"
-            render={() => <Tasks />}
+            render={() => <CreateTask />}
+          />
+          <Route
+            exact
+            path="/tasks/:id"
+            render={() => <TaskPage />}
           />
           <Route
             render={() => <NotFound />}
