@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Form, Button, Col, Row } from "react-bootstrap";
 import styles from "../styles/TaskForm.module.css";
 import btnStyles from "../styles/Button.module.css";
@@ -8,9 +8,11 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { axiosReq } from "../api/axiosDefault";
 import { useHistory } from "react-router";
 
-
 function TaskForm() {
+  const [assignedUsers, setAssignedUsers] = useState([]);
+
   const [errors, setErrors] = useState({});
+
   const [createTaskData, setCreateTaskData] = useState({
     title: "",
     description: "",
@@ -18,8 +20,13 @@ function TaskForm() {
     priority: "medium",
     category: "work",
     status: "not-started",
-    assigned_to: [], 
+    assigned_to: [],
   });
+
+  useEffect(() => {
+    fetchAllUsers();
+  }, []);
+
 
   const {
     title,
@@ -28,7 +35,7 @@ function TaskForm() {
     priority,
     category,
     status,
-    assigned_to
+    assigned_to,
   } = createTaskData;
 
   const history = useHistory();
@@ -52,13 +59,13 @@ function TaskForm() {
     formData.append("category", category);
     formData.append("status", status);
     formData.append("assigned_to", assigned_to);
-    
-    for (let pair of formData.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    }
+
+    // for (let pair of formData.entries()) {
+    //   console.log(`${pair[0]}: ${pair[1]}`);
+    // }
 
     try {
-      const {data} = await axiosReq.post("/tasks/", formData);
+      const { data } = await axiosReq.post("/tasks/", formData);
       history.push(`/tasks/${data.id}`);
     } catch (err) {
       console.log(err);
@@ -79,11 +86,27 @@ function TaskForm() {
     }));
   };
 
+  const fetchAllUsers = async () => {
+    try {
+      const { data } = await axiosReq.get("/profiles/");
+      setAssignedUsers(data.results);
+    } catch (err) {
+      console.log(err);
+      if (err.response?.status !== 200) {
+        setErrors(err.response?.data);
+      }
+    }
+  };
+
   return (
     <Container>
       <div className={styles.Container}>
-        <button className={styles.Btn} onClick={() => history.goBack()}> <IoMdArrowRoundBack />Go back</button>
-        <h2 className={styles.Title} >Create a task</h2>
+        <button className={styles.Btn} onClick={() => history.goBack()}>
+          {" "}
+          <IoMdArrowRoundBack />
+          Go back
+        </button>
+        <h2 className={styles.Title}>Create a task</h2>
         <Form onSubmit={handleSubmit}>
           <Row className="mb-3">
             <Col>
@@ -99,10 +122,10 @@ function TaskForm() {
                 />
               </Form.Group>
               {errors.title?.map((message, idx) => (
-              <p className={styles.Alert}  key={idx}>
-                {message}
-              </p>
-            ))}
+                <p className={styles.Alert} key={idx}>
+                  {message}
+                </p>
+              ))}
             </Col>
           </Row>
 
@@ -111,21 +134,20 @@ function TaskForm() {
               <Form.Group controlId="description">
                 <Form.Label>Description</Form.Label>
                 <Form.Control
-               
                   as="textarea"
                   rows={3}
                   name="description"
                   value={description}
                   onChange={handleChange}
                   placeholder="Enter task description"
-                  style={{ resize: 'none' }}
+                  style={{ resize: "none" }}
                 />
               </Form.Group>
               {errors.description?.map((message, idx) => (
-              <p className={styles.Alert}  key={idx}>
-                {message}
-              </p>
-            ))}
+                <p className={styles.Alert} key={idx}>
+                  {message}
+                </p>
+              ))}
             </Col>
           </Row>
 
@@ -163,6 +185,11 @@ function TaskForm() {
                   />
                 </div>
               </Form.Group>
+              {errors.priority?.map((message, idx) => (
+                <p className={styles.Alert} key={idx}>
+                  {message}
+                </p>
+              ))}
             </Col>
           </Row>
 
@@ -200,6 +227,11 @@ function TaskForm() {
                   />
                 </div>
               </Form.Group>
+              {errors.category?.map((message, idx) => (
+                <p className={styles.Alert} key={idx}>
+                  {message}
+                </p>
+              ))}
             </Col>
           </Row>
           <Row className="mb-3">
@@ -236,6 +268,11 @@ function TaskForm() {
                   />
                 </div>
               </Form.Group>
+              {errors.status?.map((message, idx) => (
+                <p className={styles.Alert} key={idx}>
+                  {message}
+                </p>
+              ))}
             </Col>
           </Row>
 
@@ -251,10 +288,10 @@ function TaskForm() {
                 />
               </Form.Group>
               {errors.due_date?.map((message, idx) => (
-              <p className={styles.Alert}  key={idx}>
-                {message}
-              </p>
-            ))}
+                <p className={styles.Alert} key={idx}>
+                  {message}
+                </p>
+              ))}
             </Col>
           </Row>
 
@@ -268,10 +305,14 @@ function TaskForm() {
                   name="assigned_to"
                   onChange={handleMultiSelect}
                 >
-                  {/* Припустимо, список користувачів передається через пропс users */}
-                  <option value="1" >superuser</option>
+                  {/* <option value="1" >superuser</option>
                   <option value="2"  >username</option>
-                  <option value="3" >т</option>
+                  <option value="3" >т</option> */}
+                 { assignedUsers.length > 0 && assignedUsers.map((user) => (
+                  <option key={user.id} value={user.id}>
+                    {user.owner}
+                  </option>
+                  ))}
                 </Form.Control>
               </Form.Group>
             </Col>
