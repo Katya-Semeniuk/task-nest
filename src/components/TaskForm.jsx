@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Loader from "./Loader";
 import { Container, Form, Button, Col, Row } from "react-bootstrap";
 import styles from "../styles/TaskForm.module.css";
 import btnStyles from "../styles/Button.module.css";
@@ -26,7 +27,6 @@ function TaskForm() {
   useEffect(() => {
     fetchAllUsers();
   }, []);
-
 
   const {
     title,
@@ -60,9 +60,9 @@ function TaskForm() {
     formData.append("status", status);
     formData.append("assigned_to", assigned_to);
 
-    // for (let pair of formData.entries()) {
-    //   console.log(`${pair[0]}: ${pair[1]}`);
-    // }
+    for (let pair of formData.entries()) {
+      console.log(`${pair[0]}: ${pair[1]}`);
+    }
 
     try {
       const { data } = await axiosReq.post("/tasks/", formData);
@@ -305,12 +305,23 @@ function TaskForm() {
                   name="assigned_to"
                   onChange={handleMultiSelect}
                 >
-        
-                 { assignedUsers.length > 0 && assignedUsers.map((user) => (
+                  {/* { assignedUsers.length > 0 && assignedUsers.map((user) => (
                   <option key={user.id} value={user.id}>
                     {user.owner}
                   </option>
-                  ))}
+                  ))} */}
+
+                  {!assignedUsers ? (
+                    <Loader />
+                  ) : assignedUsers.length > 0 ? (
+                    assignedUsers.map((user) => (
+                      <option key={user.id} value={user.id}>
+                        {user.owner}
+                      </option>
+                    ))
+                  ) : (
+                    <p>No users yet.</p>
+                  )}
                 </Form.Control>
               </Form.Group>
             </Col>
