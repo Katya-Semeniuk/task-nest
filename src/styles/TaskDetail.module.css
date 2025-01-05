@@ -1,0 +1,15 @@
+.Task {
+  width: 80%;
+  margin-bottom: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px;
+}
+.Title{
+  text-align: center;
+  color: #2B78EF;
+}
+.Text{
+  color: #3E85F3;
+  margin-right: 5px;
+}
