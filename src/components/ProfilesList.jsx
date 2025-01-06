@@ -1,7 +1,7 @@
 
 
-const ProfilesList = ({ pfofiles }) => {
-// console.log(pfofiles)
+const ProfilesList = ({profiles}) => {
+console.log(profiles)
   return (
     <div>
      ProfilesList

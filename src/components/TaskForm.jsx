@@ -63,8 +63,7 @@ function TaskForm() {
       formData.append("assigned_to", assigned_to);
     }
     
-    // formData.append("assigned_to", assigned_to.length > 0 ? assigned_to : []);
-    // formData.append("assigned_to", assigned_to);
+
 
     for (let pair of formData.entries()) {
       console.log(`${pair[0]}: ${pair[1]}`);  

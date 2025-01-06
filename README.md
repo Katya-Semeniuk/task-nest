@@ -92,9 +92,10 @@ The key functionality aspects:
 
 1. As a new user, I can create a new account, so that I can access all the features for signed up users..
 2. As a user, I can use the navigation bar so that I can seamlessly navigate around the app.
-3. As a logged in user I can create a task so that set parameters and assign other users.
+3. As a user I can create a task so that set parameters and assign other users.
 4. As a user, I can view my task list to focus only on my content.
 5. As a user, I can view a list of assigned tasks so that I can focus on tasks that I am assigned to.
+6. As a user I can view ll recent tasks so that I can stay up to date on what tasks other users are currently creating
 
 
 
@@ -539,7 +540,8 @@ Users list is a feature of the site giving users the ability to view all users s
 
 - registration via Google account;
 - receiving a notification about a status change of a task you have been signed up for;
-- section - teamwork - so that users who have several common tasks can keep these tasks together.
+- section - teamwork - so that users who have several common tasks can keep these tasks together;
+- a toggle option in the password input so that the user can see if they have made a mistake in entering the data.
 
 ##### Back to [top](#tick-it)
 

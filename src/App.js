@@ -4,9 +4,10 @@ import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
 import SignIn from './pages/auth/SignIn';
 import SignUp from './pages/auth/SignUp';
-import CreateTask from "./pages/CreateTask";
+import CreateTask from "./pages/tasks/CreateTask";
 import NotFound from './pages/NotFound';
-import TaskPage from "./pages/TaskPage";
+import TaskPage from "./pages/tasks/TaskPage";
+import TasksPage from "./pages/tasks/TasksPage";
 import ProfilesPage from "./pages/profile/ProfilesPage";
 import "./api/axiosDefault";
 
@@ -38,6 +39,11 @@ function App() {
             exact
             path="/profiles"
             render={() => < ProfilesPage/>}
+          />
+           <Route
+            exact
+            path="/tasks"
+            render={() => <TasksPage />}
           />
           <Route
             exact

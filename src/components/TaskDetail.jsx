@@ -8,7 +8,7 @@ import moment from "moment";
 
 
 function TaskDetail(props) {
-  console.log(props)
+  
   const {
     id,
     assigned_users,
@@ -112,8 +112,8 @@ function TaskDetail(props) {
                 {is_overdue && (
                   <ListGroup.Item>
                     {" "}
-                    <span className={styles.Text}>Is_overdue:</span>{" "}
-                    {is_overdue}
+                    <span className={styles.Text}>Is overdue!</span>{" "}
+                   
                   </ListGroup.Item>
                 )}
               </ListGroup>

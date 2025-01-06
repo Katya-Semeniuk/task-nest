@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { axiosReq } from "../api/axiosDefault";
-import TaskDetail from "../components/TaskDetail";
+import { axiosReq } from "../../api/axiosDefault";
+import TaskDetail from "../../components/TaskDetail";
 
 
 const TaskPage = () => {
