@@ -1,15 +1,42 @@
 .Task {
-  width: 80%;
+  width: 75%;
   margin-bottom: 16px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 8px;
 }
 .Title{
+  font-size: 22px;
   text-align: center;
   color: #2B78EF;
 }
 .Text{
   color: #3E85F3;
   margin-right: 5px;
+}
+
+
+.StyledLink{
+  transition: color ease-in-out 0.3s;
+}
+.StyledLink:hover{
+  color:  #FA4A0C;
+}
+
+.Complete {
+  background-color: #9cefb0;
+  border: 1px solid #84ec9d;
+  max-width: 170px;
+}
+
+.NotStarted {
+  background-color: #f49fa6; 
+  border: 1px solid #d2767d;
+  max-width: 170px;
+}
+
+.InProgress {
+  background-color: #FFEEBC; 
+  border: 1px solid #f6e4af;
+  max-width: 170px;
 }

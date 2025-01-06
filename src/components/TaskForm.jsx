@@ -6,6 +6,7 @@ import btnStyles from "../styles/Button.module.css";
 import { MdOutlineLibraryAdd } from "react-icons/md";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
+
 import { axiosReq } from "../api/axiosDefault";
 import { useHistory } from "react-router";
 
@@ -54,18 +55,24 @@ function TaskForm() {
 
     formData.append("title", title);
     formData.append("description", description);
-    formData.append("due_date", due_date);
+    formData.append("due_date",  due_date);
     formData.append("priority", priority);
     formData.append("category", category);
     formData.append("status", status);
-    formData.append("assigned_to", assigned_to);
+    if (assigned_to.length > 0) {
+      formData.append("assigned_to", assigned_to);
+    }
+    
+    // formData.append("assigned_to", assigned_to.length > 0 ? assigned_to : []);
+    // formData.append("assigned_to", assigned_to);
 
     for (let pair of formData.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
+      console.log(`${pair[0]}: ${pair[1]}`);  
     }
-
+    
     try {
       const { data } = await axiosReq.post("/tasks/", formData);
+      console.log(data)
       history.push(`/tasks/${data.id}`);
     } catch (err) {
       console.log(err);
@@ -83,7 +90,8 @@ function TaskForm() {
     setCreateTaskData((prev) => ({
       ...prev,
       assigned_to: selectedOptions,
-    }));
+    }))
+    console.log(" assigned_to in handleMultiSelect",  assigned_to);
   };
 
   const fetchAllUsers = async () => {
@@ -98,6 +106,7 @@ function TaskForm() {
     }
   };
 
+ 
   return (
     <Container>
       <div className={styles.Container}>
@@ -304,13 +313,8 @@ function TaskForm() {
                   multiple
                   name="assigned_to"
                   onChange={handleMultiSelect}
+                  value={assigned_to}
                 >
-                  {/* { assignedUsers.length > 0 && assignedUsers.map((user) => (
-                  <option key={user.id} value={user.id}>
-                    {user.owner}
-                  </option>
-                  ))} */}
-
                   {!assignedUsers ? (
                     <Loader />
                   ) : assignedUsers.length > 0 ? (
