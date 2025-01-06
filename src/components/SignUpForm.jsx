@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import styles from "../styles/SignInUpForm.module.css";
 import btnStyles from "../styles/Button.module.css";
 
+
 import {
   Form,
   Button,
@@ -33,6 +34,9 @@ const SignUpForm = () => {
       [event.target.name]: event.target.value,
     });
   };
+
+
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -121,6 +125,7 @@ const SignUpForm = () => {
             Already have an account? <span>Sign in</span>
           </Link>
         </Container>
+       
       </Col>
     </Row>
   );

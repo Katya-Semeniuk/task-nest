@@ -6,9 +6,11 @@ import { Container, Row, Col, Card, Media, ListGroup } from "react-bootstrap";
 import styles from "../styles/TaskDetail.module.css";
 import moment from "moment";
 
+
 function TaskDetail(props) {
-  // console.log(props)
+  console.log(props)
   const {
+    id,
     assigned_users,
     category,
     created_at,
@@ -21,6 +23,7 @@ function TaskDetail(props) {
     status,
     title,
     updated_at,
+    comments_count,
     taskPage,
   } = props;
 
@@ -116,7 +119,7 @@ function TaskDetail(props) {
               </ListGroup>
             </Card.Body>
             <Card.Footer >
-              <Row>
+              <Row className="d-flex align-items-center">
                 <Col> {status && (
                   <Card  className={`p-2 ${status === "complete" ? styles.Complete : 
                     status === "not-started" ? styles.NotStarted : 
@@ -125,7 +128,10 @@ function TaskDetail(props) {
                    
                   </Card>
                 )}</Col>
-                <Col className="d-flex align-items-center justify-content-end">
+                <Col className="d-flex align-items-center justify-content-center">
+                <Link to={`/posts/${id}`}><i class="fa-regular fa-comments"></i></Link>
+                {comments_count}</Col>
+                <Col className="d-flex justify-content-end">
                 {created_at && (
                 <div className="text-muted">
                   <span> Posted on:</span> {created_at}

@@ -2,13 +2,13 @@ import { Route, Switch } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
+import SignIn from './pages/auth/SignIn';
+import SignUp from './pages/auth/SignUp';
 import CreateTask from "./pages/CreateTask";
 import NotFound from './pages/NotFound';
 import TaskPage from "./pages/TaskPage";
+import ProfilesPage from "./pages/profile/ProfilesPage";
 import "./api/axiosDefault";
-
 
 
 
@@ -33,6 +33,11 @@ function App() {
             exact
             path="/signup"
             render={() => <SignUp />}
+          />
+          <Route
+            exact
+            path="/profiles"
+            render={() => < ProfilesPage/>}
           />
           <Route
             exact

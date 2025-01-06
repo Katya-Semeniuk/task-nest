@@ -13,6 +13,7 @@ import {
   Container,
 } from "react-bootstrap";
 
+
 import axios from "axios";
 
 const SignInForm = () => {
@@ -36,11 +37,12 @@ const SignInForm = () => {
     });
   };
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const {data} =  await axios.post("/dj-rest-auth/login/", signInData);
-      setCurrentUser(data.user)
+      setCurrentUser(data.user);
       history.push("/");
     } catch (err) {
       setErrors(err.response?.data);

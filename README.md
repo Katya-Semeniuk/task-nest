@@ -163,6 +163,7 @@ Balsamiq was used to create wireframes of the sites pages
 - [Moment Library](https://www.npmjs.com/package/moment) - A JavaScript date library for parsing, validating, manipulating, and formatting dates. Justification: I used to change the date display format.
 - [Font Awesome](https://fontawesome.com/) - Icon library. Justification: I used it as one of the resources for adding icons to the project.
 - [React Icons](https://react-icons.github.io/react-icons/) - Icon library. Justification: I used it as another option for adding icons to the project.
+- [React Notification](https://www.npmjs.com/package/react-notifications?activeTab=readme) - Icon library. Justification: I used it as another option for adding icons to the project.
 - [Chrome dev tools](https://developers.google.com/web/tools/chrome-devtools/) - Developer tool. Justification: I used this for debugging of the code and checking site for responsiveness
 - [Cloudinary](https://cloudinary.com/) - File storage. Justification: I used this to store static files.
 - [Git](https://git-scm.com/) - Version control system. Justification: I used this for version control and to push the code to GitHub.
@@ -231,7 +232,7 @@ There were various pages created and used in this application
 
 
 - tasks - The tasks page group consisted of the following files:
-	- TaskPage.jsx - main page for tasks
+	- TaskPage.jsx - This file queries tasks and returns details of one task
   - TasksList.jsx - This file returns the list of Tasks
 	- TaskForm.jsx - This file handles the Task create form 
 	- TaskDetail.jsx - This file returns the task detail
