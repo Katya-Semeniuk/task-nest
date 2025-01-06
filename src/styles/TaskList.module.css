@@ -1,3 +1,16 @@
+.Box{
+    max-width: 50rem;
+    margin: 20px auto;
+}
+.Title{
+    color: #3E85F3;
+}
+
 .NavLink{
     color:  #FA4A0C;
+}
+
+.Blue{
+    color: #3E85F3;
+    opacity: 0.6;
 }
