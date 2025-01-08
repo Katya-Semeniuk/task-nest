@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import TaskList from "../../components/TaskList";
 import Loader from "../../components/Loader";
-// import styles from "../../styles/TasksPage.module.css";
 import btnStyles from "../../styles/NotFound.module.css";
 
 import { axiosReq } from "../../api/axiosDefault";
@@ -27,6 +26,7 @@ export const TasksPage = () => {
 
     fetchAllTasks();
   }, []);
+  
   return (
     <div>
       <Row className="h-100">

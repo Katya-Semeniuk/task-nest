@@ -4,6 +4,7 @@ import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
 import SignIn from './pages/auth/SignIn';
 import SignUp from './pages/auth/SignUp';
+import DashboardPage from "./pages/dashboard/DashboardPage";
 import CreateTask from "./pages/tasks/CreateTask";
 import NotFound from './pages/NotFound';
 import TaskPage from "./pages/tasks/TaskPage";
@@ -27,7 +28,7 @@ function App() {
           <Route
             exact
             path="/"
-            render={() => ( <h1>Home page</h1>)}
+            render={() => <DashboardPage/>}
           />
            <Route
             exact
@@ -64,6 +65,7 @@ function App() {
             path="/tasks/:id"
             render={() => <TaskPage />}
           />
+           
           <Route
             render={() => <NotFound />}
           />
