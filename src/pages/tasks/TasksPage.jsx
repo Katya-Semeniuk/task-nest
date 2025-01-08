@@ -95,7 +95,7 @@ export const TasksPage = () => {
               <Loader />
             </div>
           ) : tasks && tasks.length > 0 ? (
-            <TaskList tasks={tasks} />
+            <TaskList tasks={tasks} setTasks={setTasks}/>
           ) : (
             <div>
               <p>No tasks yet.</p>

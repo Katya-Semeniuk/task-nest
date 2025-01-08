@@ -93,9 +93,11 @@ The key functionality aspects:
 1. As a new user, I can create a new account, so that I can access all the features for signed up users..
 2. As a user, I can use the navigation bar so that I can seamlessly navigate around the app.
 3. As a user I can create a task so that set parameters and assign other users.
-4. As a user, I can view my task list to focus only on my content.
-5. As a user, I can view a list of assigned tasks so that I can focus on tasks that I am assigned to.
-6. As a user I can view ll recent tasks so that I can stay up to date on what tasks other users are currently creating
+4. As a user I can view ll recent tasks so that I can stay up to date on what tasks other users are currently creating.
+5. As a user I can enter the task name or author in the search field so tasks that match the search query are available to me.
+6. As a user, I can keep scrolling throught loaded automatically content so I don't have to click on "next page".
+7. As a user, I can view a list of assigned tasks so that I can focus on tasks that I am assigned to.
+8. As a user, I can view my task list to focus only on my content.
 
 
 
