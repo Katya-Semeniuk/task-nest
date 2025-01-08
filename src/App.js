@@ -8,12 +8,16 @@ import CreateTask from "./pages/tasks/CreateTask";
 import NotFound from './pages/NotFound';
 import TaskPage from "./pages/tasks/TaskPage";
 import TasksPage from "./pages/tasks/TasksPage";
+import AssignedPage from "./pages/tasks/AssignedPage";
 import ProfilesPage from "./pages/profile/ProfilesPage";
+
 import "./api/axiosDefault";
 
 
 
 function App() {
+
+
 
   return (
     <div className={styles.App}>
@@ -44,6 +48,11 @@ function App() {
             exact
             path="/tasks"
             render={() => <TasksPage />}
+          />
+           <Route
+            exact
+            path="/assigned"
+            render={() => <AssignedPage  />}
           />
           <Route
             exact

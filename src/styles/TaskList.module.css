@@ -1,6 +1,12 @@
+
+.Card{
+border-radius: 8px;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
 .Box{
     max-width: 50rem;
-    margin: 20px auto;
+    margin: 30px auto;
 }
 .Title{
     color: #3E85F3;
@@ -8,9 +14,18 @@
 
 .NavLink{
     color:  #FA4A0C;
+    transition: transform ease-in-out 0.3s;
+}
+.NavLink:hover{
+   transform: scale(1.03);
 }
 
 .Blue{
     color: #3E85F3;
     opacity: 0.6;
+}
+
+.Name{
+    color:  #FA4A0C; 
+    margin-left: 0.7rem;
 }
