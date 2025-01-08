@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import TaskList from "../../components/TaskList";
 import Loader from "../../components/Loader";
-import btnStyles from "../../styles/NotFound.module.css";
+import btnCreate from "../../styles/NotFound.module.css";
+import btnStyles from "../../styles/Button.module.css";
+
 
 import { axiosReq } from "../../api/axiosDefault";
-import { Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 
 export const TasksPage = () => {
   const [tasks, setTasks] = useState([]);
@@ -26,13 +28,30 @@ export const TasksPage = () => {
 
     fetchAllTasks();
   }, []);
-  
+
   return (
-    <div>
-      <Row className="h-100">
-        <Col >
+    <Container>
+      <Row >
+        <Col className="d-flex justify-content-center">
+          <Button  className={`${btnStyles.Button} ${btnStyles.Middle} ${btnStyles.Blue}`} type="button">
+            <NavLink to="/tasks/complete">Completed</NavLink>
+          </Button>
+
+          <Button type="button"  className={`${btnStyles.Button} ${btnStyles.Middle} ${btnStyles.Blue}`}>
+          <NavLink to="/tasks/progress"> In-progress</NavLink>
+           
+          </Button>
+
+          <Button type="button"  className={`${btnStyles.Button} ${btnStyles.Middle} ${btnStyles.Blue}`}>
+          <NavLink to="/tasks/notstarted"> Not-started</NavLink>
+            
+          </Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
           {isLoading ? (
-            <div className="d-flex justify-content-center align-items-center">
+            <div className="d-flex justify-content-center align-items-center mt-3">
               <Loader />
             </div>
           ) : tasks.length > 0 ? (
@@ -40,20 +59,14 @@ export const TasksPage = () => {
           ) : (
             <div>
               <p>No tasks yet.</p>
-              <NavLink
-                className={btnStyles.NavLink}
-                to="/tasks/create"
-              >
+              <NavLink className={btnCreate.NavLink} to="/tasks/create">
                 <i class="fa-solid fa-square-plus"></i>Create task
               </NavLink>
             </div>
           )}
         </Col>
-        {/* <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-          <p>Popular tasks for desktop</p>
-        </Col> */}
       </Row>
-    </div>
+    </Container>
   );
 };
 

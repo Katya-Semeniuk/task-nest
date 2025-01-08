@@ -11,6 +11,9 @@ import { axiosReq } from "../api/axiosDefault";
 import { useHistory } from "react-router";
 
 function TaskForm() {
+
+  const history = useHistory();
+  
   const [assignedUsers, setAssignedUsers] = useState([]);
 
   const [errors, setErrors] = useState({});
@@ -39,7 +42,7 @@ function TaskForm() {
     assigned_to,
   } = createTaskData;
 
-  const history = useHistory();
+  
 
   const handleChange = (event) => {
     setCreateTaskData({
@@ -109,7 +112,7 @@ function TaskForm() {
   return (
     <Container>
       <div className={styles.Container}>
-        <button className={styles.Btn} onClick={() => history.goBack()}>
+        <button className={btnStyles.CustomBtn} onClick={() => history.goBack()}>
           {" "}
           <IoMdArrowRoundBack />
           Go back

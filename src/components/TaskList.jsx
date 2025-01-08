@@ -3,11 +3,13 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import styles from "../styles/TaskList.module.css";
 import { TbPointFilled } from "react-icons/tb";
 
+
 function TaskList({ tasks }) {
-  console.log("TaskList", tasks);
+ 
 
   return (
     <Container>
+       
       {tasks.map((task) => (
         <Row key={task.id} className={styles.Box}>
           <Col>

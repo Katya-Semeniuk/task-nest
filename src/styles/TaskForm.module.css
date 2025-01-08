@@ -17,22 +17,4 @@
     text-align: center;
   }
 
-  .Btn{
-   padding: 7px 12px;
-   font-size: 14px;
-   display: flex;
-   align-items: center;
-   gap: 5px;
-    background-color: transparent;
-    border: none;
-    outline: 1px solid black;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    transition: color ease-in-out 0.3s, outline ease-in-out 0.3s;
-
-  }
-
-  .Btn:hover{
-    color: #3E85F3;
-    outline: 1px solid #3E85F3;
-  }
+ 
