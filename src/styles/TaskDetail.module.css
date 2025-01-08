@@ -9,6 +9,7 @@
   font-size: 22px;
   text-align: center;
   color: #2B78EF;
+  margin-left: 45%;
 }
 .Text{
   color: #3E85F3;
@@ -42,4 +43,9 @@
   border: 1px solid #f6e4af;
   max-width: 170px;
   text-align: center;
+}
+
+.ButtonIcon{
+  background: transparent;
+  border: none;
 }

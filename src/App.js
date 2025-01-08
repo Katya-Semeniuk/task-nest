@@ -45,6 +45,7 @@ function App() {
             render={() => <StausFilterPage filter={`?status=not-started`} message="It seems there are no tasks."/>}
           />
           <Route exact path="/tasks/:id" render={() => <TaskPage />} />
+          <Route exact path="/tasks/:id/edit" render={() => <p>Edit task</p>} />
           <Route render={() => <NotFound />} />
         </Switch>
       </Container>

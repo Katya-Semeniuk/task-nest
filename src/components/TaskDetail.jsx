@@ -1,14 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import Avatar from "./Avatar";
 import Loader from "./Loader";
+import {axiosRes} from "../api/axiosDefault";
 import { Container, Row, Col, Card, Media, ListGroup } from "react-bootstrap";
 import styles from "../styles/TaskDetail.module.css";
 import moment from "moment";
 
-
 function TaskDetail(props) {
-  
   const {
     id,
     assigned_users,
@@ -26,21 +25,48 @@ function TaskDetail(props) {
     comments_count,
     taskPage,
   } = props;
+  const history = useHistory();
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
 
   let formarredDate = moment(due_date).format("DD MMM YYYY");
 
-  
+  const handleEdit = () => {
+    history.push(`/tasks/${id}/edit`);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/tasks/${id}/`);
+      history.goBack();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Container>
-      <Row >
+      <Row>
         <Col>
           <Card className={styles.Task} border="secondary">
             {title && (
-              <Card.Header className={styles.Title}>{title}</Card.Header>
+              <Card.Header className="d-flex">
+                <span className={styles.Title}> {title}</span>
+
+                {is_owner && taskPage && (
+                  <div className="ml-auto" >
+                    <button className={styles.ButtonIcon} onClick={handleEdit}>
+                      {" "}
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button className={styles.ButtonIcon} onClick={handleDelete} >
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                    
+                  </div>
+                )}
+              </Card.Header>
             )}
 
             <Card.Body>
@@ -53,22 +79,18 @@ function TaskDetail(props) {
                     <Avatar src={currentUser.profile_image} height={55} />
                     {owner}
                   </Link>
-                  <div className="d-flex align-items-center">
-                    <span>{updated_at}</span>
-                    {is_owner && taskPage && "...DropdownMenu"}
+                  <div>
+                    <div>Edited: {updated_at}</div>
                   </div>
                 </Media>
               )}
-            
-            
+
               {description && (
                 <Card.Text className="mb-2">
-                  <div className={styles.Text}>Description:</div>{" "}
-                  {description}
+                  <div className={styles.Text}>Description:</div> {description}
                 </Card.Text>
               )}
-            
-            
+
               <ListGroup variant="flush">
                 {category && (
                   <ListGroup.Item>
@@ -82,10 +104,12 @@ function TaskDetail(props) {
                     <span className={styles.Text}>Priority:</span> {priority}{" "}
                   </ListGroup.Item>
                 )}
-                
+
                 {!assigned_users ? (
-                  <div className="d-flex justify-content-center align-items-center"> <Loader/></div>
-                 
+                  <div className="d-flex justify-content-center align-items-center">
+                    {" "}
+                    <Loader />
+                  </div>
                 ) : assigned_users.length > 0 ? (
                   <ListGroup.Item>
                     <span className={styles.Text}>Assigned_to:</span>{" "}
@@ -113,33 +137,47 @@ function TaskDetail(props) {
                   <ListGroup.Item>
                     {" "}
                     <span className={styles.Text}>Is overdue!</span>{" "}
-                   
                   </ListGroup.Item>
                 )}
               </ListGroup>
             </Card.Body>
-            <Card.Footer >
+            <Card.Footer>
               <Row className="d-flex align-items-center">
-                <Col> {status && (
-                  <Card  className={`p-2 ${status === "complete" ? styles.Complete : 
-                    status === "not-started" ? styles.NotStarted : 
-                    status === "in-progress" ? styles.InProgress : ""}`}>
-                    <div> Status: <span >{status}</span> </div>
-                   
-                  </Card>
-                )}</Col>
+                <Col>
+                  {" "}
+                  {status && (
+                    <Card
+                      className={`p-2 ${
+                        status === "complete"
+                          ? styles.Complete
+                          : status === "not-started"
+                          ? styles.NotStarted
+                          : status === "in-progress"
+                          ? styles.InProgress
+                          : ""
+                      }`}
+                    >
+                      <div>
+                        {" "}
+                        Status: <span>{status}</span>{" "}
+                      </div>
+                    </Card>
+                  )}
+                </Col>
                 <Col className="d-flex align-items-center justify-content-center">
-                <Link to={`/posts/${id}`}><i class="fa-regular fa-comments"></i></Link>
-                {comments_count}</Col>
+                  <Link to={`/posts/${id}`}>
+                    <i class="fa-regular fa-comments"></i>
+                  </Link>
+                  {comments_count}
+                </Col>
                 <Col className="d-flex justify-content-end">
-                {created_at && (
-                <div className="text-muted">
-                  <span> Posted on:</span> {created_at}
-                </div>
-              )}</Col>
+                  {created_at && (
+                    <div className="text-muted">
+                      <span> Posted on:</span> {created_at}
+                    </div>
+                  )}
+                </Col>
               </Row>
-            
-              
             </Card.Footer>
           </Card>
         </Col>
