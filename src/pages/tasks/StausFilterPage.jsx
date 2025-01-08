@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
+import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefault";
 import TaskList from "../../components/TaskList";
 import Loader from "../../components/Loader";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { useHistory } from "react-router";
+
 import btnStyle from "../../styles/Button.module.css";
 
 
@@ -20,7 +21,8 @@ export const StausFilterPage = ({message, filter}) => {
     const fetchTasks = async () => {
       try {
         setIsLoading(true)
-        const { data } = await axiosReq.get(`${filter}`);
+        const { data } = await axiosReq.get(`/tasks/${filter}`);
+        console.log(data.results)
         setTasks(data);
         setIsLoading(false)
       } catch (err) {

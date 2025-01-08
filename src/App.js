@@ -32,17 +32,17 @@ function App() {
           <Route
             exact
             path="/tasks/complete"
-            render={() => <StausFilterPage filter={`/tasks/?status=complete`} message="It seems there are no tasks."/>}
+            render={() => <StausFilterPage filter={`?status=complete`} message="It seems there are no tasks."/>}
           />
           <Route
             exact
             path="/tasks/progress"
-            render={() => <StausFilterPage filter={`/tasks/?status=in-progress`} message="It seems there are no tasks."/>}
+            render={() => <StausFilterPage filter={`?status=in-progress`} message="It seems there are no tasks."/>}
           />
           <Route
             exact
             path="/tasks/notstarted"
-            render={() => <StausFilterPage filter={`/tasks/?status=not-started`} message="It seems there are no tasks."/>}
+            render={() => <StausFilterPage filter={`?status=not-started`} message="It seems there are no tasks."/>}
           />
           <Route exact path="/tasks/:id" render={() => <TaskPage />} />
           <Route render={() => <NotFound />} />

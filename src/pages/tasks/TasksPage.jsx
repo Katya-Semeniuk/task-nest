@@ -4,21 +4,29 @@ import TaskList from "../../components/TaskList";
 import Loader from "../../components/Loader";
 import btnCreate from "../../styles/NotFound.module.css";
 import btnStyles from "../../styles/Button.module.css";
-
+import styles from "../../styles/TasksPage.module.css";
+import { FcSearch } from "react-icons/fc";
 
 import { axiosReq } from "../../api/axiosDefault";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 
 export const TasksPage = () => {
   const [tasks, setTasks] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const fetchAllTasks = async () => {
       try {
-        setIsLoading(true);
-        const { data } = await axiosReq.get("/tasks/");
+       
+        let url = "/tasks/";
+        if (query) {
+          url += `?search=${query}`;
+        }
+        const { data } = await axiosReq.get(url);
         setTasks(data.results);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
       } finally {
@@ -26,26 +34,58 @@ export const TasksPage = () => {
       }
     };
 
-    fetchAllTasks();
-  }, []);
+    const timer = setTimeout(() => {
+      fetchAllTasks();
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [query]);
 
   return (
     <Container>
-      <Row >
+      <Row>
         <Col className="d-flex justify-content-center">
-          <Button  className={`${btnStyles.Button} ${btnStyles.Middle} ${btnStyles.Blue}`} type="button">
+          <Button
+            className={`${btnStyles.Button} ${btnStyles.Middle} ${btnStyles.Blue}`}
+            type="button"
+          >
             <NavLink to="/tasks/complete">Completed</NavLink>
           </Button>
 
-          <Button type="button"  className={`${btnStyles.Button} ${btnStyles.Middle} ${btnStyles.Blue}`}>
-          <NavLink to="/tasks/progress"> In-progress</NavLink>
-           
+          <Button
+            type="button"
+            className={`${btnStyles.Button} ${btnStyles.Middle} ${btnStyles.Blue}`}
+          >
+            <NavLink to="/tasks/progress"> In-progress</NavLink>
           </Button>
 
-          <Button type="button"  className={`${btnStyles.Button} ${btnStyles.Middle} ${btnStyles.Blue}`}>
-          <NavLink to="/tasks/notstarted"> Not-started</NavLink>
-            
+          <Button
+            type="button"
+            className={`${btnStyles.Button} ${btnStyles.Middle} ${btnStyles.Blue}`}
+          >
+            <NavLink to="/tasks/notstarted"> Not-started</NavLink>
           </Button>
+        </Col>
+      </Row>
+      <Row className="mt-3">
+        <Col>
+          <Form
+            className={styles.SearchBar}
+            onSubmit={(event) => event.preventDefault()}
+          >
+            <div className={styles.IconWrapper}>
+            <Form.Control
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              type="text"
+              placeholder="find a task by entering the task title or author "
+            />
+            <FcSearch  className={styles.Icon}/>
+            </div>
+          </Form>
+          
         </Col>
       </Row>
       <Row>
@@ -54,7 +94,7 @@ export const TasksPage = () => {
             <div className="d-flex justify-content-center align-items-center mt-3">
               <Loader />
             </div>
-          ) : tasks.length > 0 ? (
+          ) : tasks && tasks.length > 0 ? (
             <TaskList tasks={tasks} />
           ) : (
             <div>

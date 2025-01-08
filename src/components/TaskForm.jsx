@@ -309,7 +309,7 @@ function TaskForm() {
           <Row className="mb-3">
             <Col>
               <Form.Group controlId="assigned_to">
-                <Form.Label>Assigned To</Form.Label>
+                <Form.Label>Assigne to: </Form.Label>
                 <Form.Control
                   as="select"
                   multiple
