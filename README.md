@@ -96,8 +96,10 @@ The key functionality aspects:
 4. As a user I can view ll recent tasks so that I can stay up to date on what tasks other users are currently creating.
 5. As a user I can enter the task name or author in the search field so tasks that match the search query are available to me.
 6. As a user, I can keep scrolling throught loaded automatically content so I don't have to click on "next page".
-7. As a user, I can view a list of assigned tasks so that I can focus on tasks that I am assigned to.
+7. As a user, I can delete my post so that it is no longer saved in the database and does not distract from current tasks. 
+8. As a user, I can edit my own tasks so I can make corrections or update it after it was created.
 8. As a user, I can view my task list to focus only on my content.
+9. As a user, I can view a list of assigned tasks so that I can focus on tasks that I am assigned to.
 
 
 

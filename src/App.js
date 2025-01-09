@@ -5,7 +5,8 @@ import NavBar from "./components/NavBar";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
 import DashboardPage from "./pages/dashboard/DashboardPage";
-import CreateTask from "./pages/tasks/CreateTask";
+import TaskCreatePage from "./pages/tasks/TaskCreatePage";
+import TaskEditPage from "./pages/tasks/TaskEditPage";
 import NotFound from "./pages/NotFound";
 import TaskPage from "./pages/tasks/TaskPage";
 import TasksPage from "./pages/tasks/TasksPage";
@@ -27,7 +28,7 @@ function App() {
           <Route exact path="/profiles" render={() => <ProfilesPage />} />
           <Route exact path="/tasks" render={() => <TasksPage />} />
           <Route exact path="/assigned" render={() => <AssignedPage />} />
-          <Route exact path="/tasks/create" render={() => <CreateTask />} />
+          <Route exact path="/tasks/create" render={() => <TaskCreatePage />} />
 
           <Route
             exact
@@ -45,7 +46,7 @@ function App() {
             render={() => <StausFilterPage filter={`?status=not-started`} message="It seems there are no tasks."/>}
           />
           <Route exact path="/tasks/:id" render={() => <TaskPage />} />
-          <Route exact path="/tasks/:id/edit" render={() => <p>Edit task</p>} />
+          <Route exact path="/tasks/:id/edit" render={() => <TaskEditPage/>} />
           <Route render={() => <NotFound />} />
         </Switch>
       </Container>

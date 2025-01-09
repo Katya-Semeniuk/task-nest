@@ -10,7 +10,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { axiosReq } from "../api/axiosDefault";
 import { useHistory } from "react-router";
 
-function TaskForm() {
+function TaskCreateForm() {
 
   const history = useHistory();
   
@@ -62,11 +62,14 @@ function TaskForm() {
     formData.append("priority", priority);
     formData.append("category", category);
     formData.append("status", status);
-    if (assigned_to.length > 0) {
-      formData.append("assigned_to", assigned_to);
+    formData.append("assigned_to", assigned_to);
+    
+    if (Array.isArray(assigned_to)) {
+      assigned_to.forEach((item, index) => {
+        console.log(`Element ${index}:`, item, "| Type:", typeof item);
+      });
     }
     
-
 
     for (let pair of formData.entries()) {
       console.log(`${pair[0]}: ${pair[1]}`);  
@@ -87,13 +90,13 @@ function TaskForm() {
   const handleMultiSelect = (e) => {
     const selectedOptions = Array.from(
       e.target.selectedOptions,
-      (option) => option.value
+      (option) => Number(option.value)
     );
     setCreateTaskData((prev) => ({
       ...prev,
-      assigned_to: selectedOptions,
+      assigned_to:selectedOptions,
     }))
-    console.log(" assigned_to in handleMultiSelect",  assigned_to);
+    console.log(" assigned_to in handleMultiSelect",  selectedOptions);
   };
 
   const fetchAllUsers = async () => {
@@ -122,7 +125,7 @@ function TaskForm() {
           <Row className="mb-3">
             <Col>
               <Form.Group controlId="title">
-                <Form.Label>Title</Form.Label>
+                <Form.Label>Title:</Form.Label>
                 <Form.Control
                   type="text"
                   name="title"
@@ -143,7 +146,7 @@ function TaskForm() {
           <Row className="mb-3">
             <Col>
               <Form.Group controlId="description">
-                <Form.Label>Description</Form.Label>
+                <Form.Label>Description:</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
@@ -165,7 +168,7 @@ function TaskForm() {
           <Row className="mb-3">
             <Col>
               <Form.Group controlId="priority">
-                <Form.Label>Priority</Form.Label>
+                <Form.Label>Priority:</Form.Label>
                 <div>
                   <Form.Check
                     inline
@@ -207,7 +210,7 @@ function TaskForm() {
           <Row className="mb-3">
             <Col>
               <Form.Group controlId="category">
-                <Form.Label>Category</Form.Label>
+                <Form.Label>Category:</Form.Label>
                 <div>
                   <Form.Check
                     inline
@@ -248,7 +251,7 @@ function TaskForm() {
           <Row className="mb-3">
             <Col>
               <Form.Group controlId="status">
-                <Form.Label>Status</Form.Label>
+                <Form.Label>Status:</Form.Label>
                 <div>
                   <Form.Check
                     inline
@@ -290,7 +293,7 @@ function TaskForm() {
           <Row className="mb-3">
             <Col>
               <Form.Group controlId="due_date">
-                <Form.Label>Due Date</Form.Label>
+                <Form.Label>Due Date:</Form.Label>
                 <Form.Control
                   type="date"
                   name="due_date"
@@ -309,7 +312,8 @@ function TaskForm() {
           <Row className="mb-3">
             <Col>
               <Form.Group controlId="assigned_to">
-                <Form.Label>Assigne to: </Form.Label>
+                <Form.Label>Assigne to:
+                <p>To select multiple participants, press Ctrl and select the name</p> </Form.Label>
                 <Form.Control
                   as="select"
                   multiple
@@ -326,7 +330,7 @@ function TaskForm() {
                       </option>
                     ))
                   ) : (
-                    <p>No users yet.</p>
+                    <option disabled>No users available.</option>
                   )}
                 </Form.Control>
               </Form.Group>
@@ -346,4 +350,4 @@ function TaskForm() {
   );
 }
 
-export default TaskForm;
+export default TaskCreateForm;
