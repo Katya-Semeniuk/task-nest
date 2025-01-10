@@ -82,7 +82,7 @@ export const TasksPage = () => {
               type="text"
               placeholder="find a task by entering the task title or author "
             />
-            <FcSearch  className={styles.Icon}/>
+            <FcSearch  className={styles.IconSearch}/>
             </div>
           </Form>
           

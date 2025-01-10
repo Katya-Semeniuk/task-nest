@@ -5,7 +5,7 @@ import styles from "../styles/ProfilesList.module.css";
 import { FcNext } from "react-icons/fc";
 
 const ProfilesList = ({ profiles }) => {
-  console.log(profiles);
+
   return (
     <Container>
       {profiles.map((user) => (
