@@ -62,7 +62,7 @@ const ProfilesPage = () => {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 type="text"
-                placeholder="find a user by entering the task title or author"
+                placeholder="find a user by the name or task title"
               />
               <FcSearch className={styles.IconSearch} />
               <SlClose  className={styles.IconClose} onClick={cleanSearchInput}/>

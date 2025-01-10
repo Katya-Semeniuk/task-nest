@@ -1,17 +1,31 @@
 import React, { useState, useEffect } from "react";
 import Avatar from "./Avatar";
 import {  useHistory } from "react-router";
-import { Card, Container } from "react-bootstrap";
+import { Card, Container , Modal, Button} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from "../styles/ProfileDetail.module.css";
 import btnStyles from "../styles/Button.module.css";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { FcRight } from "react-icons/fc";
+import {useCurrentUser} from "../contexts/CurrentUserContext";
+import { MdDeleteOutline} from "react-icons/md";
+import { axiosRes } from "../api/axiosDefault";
+
+
 
 export const ProfileDetail = ({ userData }) => {
-  console.log(userData)
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
   const history = useHistory();
-  const { owner, created_at, tasks, tasks_count,  image } = userData;
+ 
+  const { owner, created_at, tasks, tasks_count,  image, id } = userData;
+
+  const currentUser = useCurrentUser();
+
+  const is_owner = currentUser?.username === owner;
 
   const [completeTask, setCompleteTasks] = useState([]);
   const [inProgressTask, setInProgressTasks] = useState([]);
@@ -35,6 +49,17 @@ export const ProfileDetail = ({ userData }) => {
     setShowTaskList(!showTaskList);
     console.log("toggleShowTaskList", showTaskList)
   };
+
+   const handleDelete = async () => {
+      try {
+        await axiosRes.delete(`/tasks/${id}/`);
+        handleClose();
+        history.goBack();
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
   return (
     <Container>
       <button className={btnStyles.CustomBtn} onClick={() => history.goBack()}>
@@ -42,8 +67,12 @@ export const ProfileDetail = ({ userData }) => {
           <IoMdArrowRoundBack />
           Go back
         </button>
-
-      <Card className={styles.Card}>
+        <Card className={styles.Card}>
+          {is_owner && (
+            <div className={styles.ButtonWrapper}>
+              <button type="button" className={styles.ButtonEl} onClick={handleShow}><MdDeleteOutline /></button>
+            </div>
+          )}
         <Card.Body>
           <div className={styles.Header}>
             <div>
@@ -84,7 +113,7 @@ export const ProfileDetail = ({ userData }) => {
                   <div className="mt-2">
                   {tasks.map((task) => (
                     <Link key={task.id} to={`/tasks/${task.id}`} className={styles.StyledLink}>
-                      {task.title}
+                      {task.title} <FcRight/>
                     </Link>
                   ))}
                   </div>
@@ -97,6 +126,40 @@ export const ProfileDetail = ({ userData }) => {
           </Card.Text>
         </Card.Body>
       </Card>
+      {show && (
+        <Modal
+        className={styles.Modal}
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title className={styles.ModalTitle}>
+              Are you sure you want to delete your account?{" "}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            If you confirm the action, your account will be deleted permanently
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              className={btnStyles.Button}
+              variant="secondary"
+              onClick={handleClose}
+            >
+              Cancel
+            </Button>
+            <Button
+              className={`${btnStyles.Button} ml-2`}
+              onClick={handleDelete}
+            >
+              YES
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
+    
     </Container>
   );
 };

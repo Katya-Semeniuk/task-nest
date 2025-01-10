@@ -37,7 +37,7 @@ const ProfilesList = ({ profiles }) => {
                       )}
                     </>
                   ) : (
-                    <span>No tasks</span>
+                    <span>No tasks yet</span>
                   )}
                 </Card.Text>
                 <Card.Text>

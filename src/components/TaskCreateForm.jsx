@@ -5,12 +5,14 @@ import styles from "../styles/TaskForm.module.css";
 import btnStyles from "../styles/Button.module.css";
 import { MdOutlineLibraryAdd } from "react-icons/md";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { useRedirect } from "../hooks/useRedirect";
 
 
 import { axiosReq } from "../api/axiosDefault";
 import { useHistory } from "react-router";
 
 function TaskCreateForm() {
+  useRedirect('loggedOut');
 
   const history = useHistory();
   

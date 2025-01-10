@@ -15,8 +15,12 @@
   padding-left: 50px;
   margin-top: 20px;
 }
+
 .SearchBar input::placeholder {
   color: #84878f;
+  @media screen and (max-width: 575px){
+ color: white;
+  }
 }
 
 .IconWrapper {

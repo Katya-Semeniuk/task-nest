@@ -1,28 +1,60 @@
-.Card{
-    max-width: 45rem;
-    margin: 0 auto;
-    padding: 15px;
-    border-radius: 12px;
+.Card {
+  max-width: 45rem;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 12px;
 }
 
-.Header{
-    display: flex;
-    gap: 80px;
+.Header {
+  display: flex;
+  gap: 70px;
 }
-.Title{
-    color: #ee450a;
+.Title {
+  color: #ee450a;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.Status {
+  padding: 10px 15px;
+  text-align: center;
+}
+
+.StyledLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: aliceblue;
+  padding: 10px 30px;
+  margin: 10px;
+  border-radius: 6px;
+  color: #3e85f3;
+  transition: background-color ease-in-out 0.3s, color ease-in-out 0.3s;
+}
+.StyledLink:hover {
+  background-color: rgb(223 237 249);
+}
+
+.ButtonWrapper {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.ButtonEl {
+  font-size: 1.1rem;
+  border: 1px solid rgb(223 237 249);
+  border-radius: 6px;
+  transition: color ease-in-out 0.3s;
+}
+.ButtonEl:hover {
+  color: #ee450a;
+}
+
+.ModalTitle{
+    font-size: 1.04rem;
     text-align: center;
-    text-transform: uppercase;
-    font-weight: 700;
-}
+    color: #FA4A0C;
 
-.Status{
-    padding: 10px 15px;
-    text-align: center;
-}
-
-.StyledLink{
-    background-color: aliceblue;
-    padding: 10px;
-    margin: 10px;
-}
+  }
