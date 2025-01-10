@@ -1,10 +1,19 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import Avatar from "./Avatar";
 import Loader from "./Loader";
-import {axiosRes} from "../api/axiosDefault";
-import { Container, Row, Col, Card, Media, ListGroup, Modal, Button } from "react-bootstrap";
+import { axiosRes } from "../api/axiosDefault";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Media,
+  ListGroup,
+  Modal,
+  Button,
+} from "react-bootstrap";
 import styles from "../styles/TaskDetail.module.css";
 import btnStyles from "../styles/Button.module.css";
 import moment from "moment";
@@ -64,15 +73,14 @@ function TaskDetail(props) {
                 <span className={styles.Title}> {title}</span>
 
                 {is_owner && taskPage && (
-                  <div className="ml-auto" >
+                  <div className="ml-auto">
                     <button className={styles.ButtonIcon} onClick={handleEdit}>
                       {" "}
                       <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button className={styles.ButtonIcon} onClick={handleShow}  >
+                    <button className={styles.ButtonIcon} onClick={handleShow}>
                       <i class="fa-solid fa-trash"></i>
                     </button>
-                    
                   </div>
                 )}
               </Card.Header>
@@ -88,7 +96,7 @@ function TaskDetail(props) {
                     <Avatar src={currentUser.profile_image} height={55} />
                     {owner}
                   </Link>
-                  <div>
+                  <div className="d-none d-md-block small">
                     <div>Edited: {updated_at}</div>
                   </div>
                 </Media>
@@ -114,26 +122,29 @@ function TaskDetail(props) {
                   </ListGroup.Item>
                 )}
 
-                {!assigned_users ? (
-                  <div className="d-flex justify-content-center align-items-center">
-                    {" "}
-                    <Loader />
-                  </div>
-                ) : assigned_users.length > 0 ? (
-                  <ListGroup.Item>
-                    <span className={styles.Text}>Assigned_to:</span>{" "}
-                    {assigned_users.map((user) => (
-                      <Link key={user.id}>
-                        {" "}
-                        <span className={styles.StyledLink}>
-                          {user.username}
-                        </span>{" "}
-                      </Link>
-                    ))}
-                  </ListGroup.Item>
-                ) : (
-                  <p>No users assigned.</p>
-                )}
+                <ListGroup.Item>
+                <span className={styles.Text}>Assigned to:</span>
+                  {assigned_users ? (
+                    assigned_users.length > 0 ? (
+                      <>
+                       
+                        {assigned_users.map((user) => (
+                          <Link key={user.id}>
+                            <span className={styles.StyledLink}>
+                              {user.username}
+                            </span>
+                          </Link>
+                        ))}
+                      </>
+                    ) : (
+                      <span>No users assigned.</span>
+                    )
+                  ) : (
+                    <div className="d-flex justify-content-center align-items-center">
+                      <Loader />
+                    </div>
+                  )}
+                </ListGroup.Item>
 
                 {due_date && (
                   <ListGroup.Item>
@@ -151,7 +162,7 @@ function TaskDetail(props) {
               </ListGroup>
             </Card.Body>
             <Card.Footer>
-              <Row className="d-flex align-items-center">
+              <Row className="d-flex align-items-center justify-content-between">
                 <Col>
                   {" "}
                   {status && (
@@ -173,13 +184,13 @@ function TaskDetail(props) {
                     </Card>
                   )}
                 </Col>
-                <Col className="d-flex align-items-center justify-content-center">
+                <Col className="d-flex align-items-center justify-content-end justify-content-md-center ">
                   <Link to={`/posts/${id}`}>
                     <i class="fa-regular fa-comments"></i>
                   </Link>
                   {comments_count}
                 </Col>
-                <Col className="d-flex justify-content-end">
+                <Col className="d-none d-md-flex justify-content-end">
                   {created_at && (
                     <div className="text-muted">
                       <span> Posted on:</span> {created_at}
@@ -193,27 +204,35 @@ function TaskDetail(props) {
       </Row>
       {show && (
         <Modal
-        
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title className={styles.ModalTitle}>
-           
-           Are you sure you want to delete the task? </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        If you confirm the action, the task will be deleted permanently
-        </Modal.Body>
-        <Modal.Footer>
-          <Button className={btnStyles.Button} variant="secondary" onClick={handleClose} >
-          Cancel
-          </Button>
-          <Button className={`${btnStyles.Button} ml-2`} onClick={handleDelete}>YES</Button>
-        </Modal.Footer>
-      </Modal>
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title className={styles.ModalTitle}>
+              Are you sure you want to delete the task?{" "}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            If you confirm the action, the task will be deleted permanently
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              className={btnStyles.Button}
+              variant="secondary"
+              onClick={handleClose}
+            >
+              Cancel
+            </Button>
+            <Button
+              className={`${btnStyles.Button} ml-2`}
+              onClick={handleDelete}
+            >
+              YES
+            </Button>
+          </Modal.Footer>
+        </Modal>
       )}
     </Container>
   );

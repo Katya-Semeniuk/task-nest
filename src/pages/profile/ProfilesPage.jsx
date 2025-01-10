@@ -14,12 +14,12 @@ const ProfilesPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
 
-  
+  console.log("ProfilesPage", profiles)
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchAllUsers = async () => {
       try {
-        setIsLoading(true);
         let url = "/profiles/";
           if (query) {
             url += `?search=${query}`;

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
-import { useHistory } from "react-router";
+import { useLocation, useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefault";
 import TaskList from "../../components/TaskList";
 import Loader from "../../components/Loader";

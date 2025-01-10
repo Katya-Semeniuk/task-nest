@@ -8,7 +8,7 @@ import styles from "../../styles/TasksPage.module.css";
 import { FcSearch } from "react-icons/fc";
 
 import { axiosReq } from "../../api/axiosDefault";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Container, Row, Col, Form } from "react-bootstrap";
 
 export const TasksPage = () => {
   const [tasks, setTasks] = useState([]);
@@ -19,7 +19,6 @@ export const TasksPage = () => {
   useEffect(() => {
     const fetchAllTasks = async () => {
       try {
-       
         let url = "/tasks/";
         if (query) {
           url += `?search=${query}`;
@@ -46,27 +45,29 @@ export const TasksPage = () => {
   return (
     <Container>
       <Row>
-        <Col className="d-flex justify-content-center">
-          <Button
+        <Col className={styles.BtnWrapper} >
+          <NavLink
+            to="/tasks/complete"
             className={`${btnStyles.Button} ${btnStyles.Middle} ${btnStyles.Blue}`}
-            type="button"
           >
-            <NavLink to="/tasks/complete">Completed</NavLink>
-          </Button>
+            Completed
+          </NavLink>
 
-          <Button
-            type="button"
+          <NavLink
+            to="/tasks/progress"
             className={`${btnStyles.Button} ${btnStyles.Middle} ${btnStyles.Blue}`}
           >
-            <NavLink to="/tasks/progress"> In-progress</NavLink>
-          </Button>
+            {" "}
+            In-progress
+          </NavLink>
 
-          <Button
-            type="button"
+          <NavLink
+            to="/tasks/notstarted"
             className={`${btnStyles.Button} ${btnStyles.Middle} ${btnStyles.Blue}`}
           >
-            <NavLink to="/tasks/notstarted"> Not-started</NavLink>
-          </Button>
+            {" "}
+            Not-started
+          </NavLink>
         </Col>
       </Row>
       <Row className="mt-3">
@@ -76,16 +77,15 @@ export const TasksPage = () => {
             onSubmit={(event) => event.preventDefault()}
           >
             <div className={styles.IconWrapper}>
-            <Form.Control
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              type="text"
-              placeholder="find a task by entering the task title or author "
-            />
-            <FcSearch  className={styles.IconSearch}/>
+              <Form.Control
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                type="text"
+                placeholder="find a task by entering the task title or author "
+              />
+              <FcSearch className={styles.IconSearch} />
             </div>
           </Form>
-          
         </Col>
       </Row>
       <Row>
@@ -95,7 +95,7 @@ export const TasksPage = () => {
               <Loader />
             </div>
           ) : tasks && tasks.length > 0 ? (
-            <TaskList tasks={tasks} setTasks={setTasks}/>
+            <TaskList tasks={tasks} setTasks={setTasks} />
           ) : (
             <div>
               <p>No tasks yet.</p>

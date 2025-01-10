@@ -338,7 +338,7 @@ function TaskCreateForm() {
           </Row>
 
           <Button
-            className={`${btnStyles.Button} ${btnStyles.Middle} ${btnStyles.Blue}`}
+            className={`${btnStyles.Button} ${btnStyles.Middle} ${btnStyles.Blue} ml-auto mr-auto`}
             type="submit"
           >
             Create Task

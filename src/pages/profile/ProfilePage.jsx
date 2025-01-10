@@ -5,17 +5,17 @@ import Loader from "../../components/Loader";
 import ProfileDetail from "../../components/ProfileDetail";
 
 export const ProfilePage = () => {
-  const [userData, setUserData] = useState({ results: [] });
+  const [userData, setUserData] = useState( [] );
   const [isLoading, setIsLoading] = useState(false)
   const { id } = useParams();
+  console.log("ProfilePage", userData)
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         setIsLoading(true);
         const { data: userData } = await axiosReq.get(`/profiles/${id}`);
-        console.log(userData);
-        setUserData({ results: [userData] });
+        setUserData(userData);
         setIsLoading(false);
       } catch (err) {
         console.log(err);
@@ -28,26 +28,14 @@ export const ProfilePage = () => {
     fetchUserData();
   }, [id]);
 
-  //  useEffect(() => {
-  //     const fetchUserData = async () => {
-  //       try {
-  //         const [{ data: userData }, { data: userTasks }] = await Promise.all([
-  //           axiosReq.get(`/profiles/${id}`),
-  //           axiosReq.get(`/profiles/?task=${id}`),
-  //         ]);
-  //         setTask({ results: [task] });
-  //         setComments(comments);
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     };
 
-  //     fetchUserData();
-  //   }, [id]);
 
   return (
     <div>
-      <ProfileDetail />
+      {isLoading ? (
+        <div className="d-flex justify-content-center mt-2"><Loader/></div>
+        ) : (<ProfileDetail userData={userData}/>)}
+      
     </div>
   );
 };

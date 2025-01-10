@@ -14,13 +14,10 @@
   background-color: #ee450a !important;
 }
 
-.Button:active {
+/* .Button:active {
   background-color: #ee450a !important;
-}
+} */
 
-/* .Button:focus {
-    background-color: #ee450a;
-  } */
 
 .Wide {
   padding: 12px 50px;
@@ -30,8 +27,6 @@
 .Middle {
   display: block;
   padding: 12px 50px;
-  width: 30%;
-  margin: auto;
   border-radius: 8px;
 }
 
@@ -50,13 +45,16 @@
   color: #ffffff;
 }
 
-.OrangeOutline,
+/* .OrangeOutline,
 .Orange:hover {
   background-color: #ffffff;
   color: #2142b2;
+} */
+.Dark:hover{
+  box-shadow: 4px 2px 16px 0px rgba(136, 165, 191, 0.48);
 }
 
-.Black,
+/* .Black,
 .BlackOutline:hover {
   background-color: #242a3d;
   color: aliceblue;
@@ -66,7 +64,7 @@
 .BlackOutline {
   background-color: aliceblue;
   color: #242a3d;
-}
+} */
 
 .Bright {
   background-color: #fa4a0c;

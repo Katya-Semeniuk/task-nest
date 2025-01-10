@@ -1,0 +1,28 @@
+.Card{
+    max-width: 45rem;
+    margin: 0 auto;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.Header{
+    display: flex;
+    gap: 80px;
+}
+.Title{
+    color: #ee450a;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.Status{
+    padding: 10px 15px;
+    text-align: center;
+}
+
+.StyledLink{
+    background-color: aliceblue;
+    padding: 10px;
+    margin: 10px;
+}
