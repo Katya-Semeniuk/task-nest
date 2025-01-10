@@ -15,6 +15,7 @@ function CommentCreateForm(props) {
   const [content, setContent] = useState("");
 
   const handleChange = (event) => {
+    console.log(event.target.value)
     setContent(event.target.value);
   };
 

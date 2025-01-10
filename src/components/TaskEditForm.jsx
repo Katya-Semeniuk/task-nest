@@ -17,6 +17,7 @@ function TaskEditForm() {
   const { id } = useParams();
   
   const [assignedUsers, setAssignedUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
 
   const [errors, setErrors] = useState({});
 
@@ -45,6 +46,7 @@ function TaskEditForm() {
   useEffect(() => {
     const fetchTaskData = async () => {
       try {
+        setIsLoading(true);
         const { data } = await axiosReq.get(`/tasks/${id}/`);
         const {  title,
             description,
@@ -53,7 +55,7 @@ function TaskEditForm() {
             category,
             status,
             assigned_to, is_owner} = data;
-
+            setIsLoading(false);
         is_owner ? setTaskData({  title,
             description,
             due_date,
@@ -61,8 +63,12 @@ function TaskEditForm() {
             category,
             status,
             assigned_to, }) : history.push("/");
+            
       } catch (err) {
         console.log(err);
+      }
+      finally{
+        setIsLoading(false);
       }
     };
 
@@ -142,7 +148,9 @@ function TaskEditForm() {
           Go back
         </button>
         <h2 className={styles.Title}> Edit your task <FcTodoList className="ml-2" /></h2>
-        <Form onSubmit={handleSubmit}>
+        {isLoading ? ((
+          <div className="d-flex justify-content-center mt-3"><Loader/></div>
+          )) : ( <Form onSubmit={handleSubmit}>
           <Row className="mb-3">
             <Col>
               <Form.Group controlId="title">
@@ -366,7 +374,8 @@ function TaskEditForm() {
           
            <MdOutlineDoneOutline className="ml-2"/>
           </Button>
-        </Form>
+        </Form>)}
+       
       </div>
     </Container>
   );
