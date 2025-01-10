@@ -78,7 +78,7 @@ function TaskDetail(props) {
               </Card.Header>
             )}
 
-            <Card.Body>
+            <Card.Body className={styles.Body}>
               {currentUser && (
                 <Media className="d-flex align-items-center justify-content-between mb-3">
                   <Link
