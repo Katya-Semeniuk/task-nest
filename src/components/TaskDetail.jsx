@@ -1,10 +1,12 @@
+import React, { useState} from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import Avatar from "./Avatar";
 import Loader from "./Loader";
 import {axiosRes} from "../api/axiosDefault";
-import { Container, Row, Col, Card, Media, ListGroup } from "react-bootstrap";
+import { Container, Row, Col, Card, Media, ListGroup, Modal, Button } from "react-bootstrap";
 import styles from "../styles/TaskDetail.module.css";
+import btnStyles from "../styles/Button.module.css";
 import moment from "moment";
 
 function TaskDetail(props) {
@@ -25,6 +27,12 @@ function TaskDetail(props) {
     comments_count,
     taskPage,
   } = props;
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const history = useHistory();
 
   const currentUser = useCurrentUser();
@@ -39,6 +47,7 @@ function TaskDetail(props) {
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/tasks/${id}/`);
+      handleClose();
       history.goBack();
     } catch (err) {
       console.log(err);
@@ -60,7 +69,7 @@ function TaskDetail(props) {
                       {" "}
                       <i class="fa-solid fa-pen-to-square"></i>
                     </button>
-                    <button className={styles.ButtonIcon} onClick={handleDelete} >
+                    <button className={styles.ButtonIcon} onClick={handleShow}  >
                       <i class="fa-solid fa-trash"></i>
                     </button>
                     
@@ -182,6 +191,30 @@ function TaskDetail(props) {
           </Card>
         </Col>
       </Row>
+      {show && (
+        <Modal
+        
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title className={styles.ModalTitle}>
+           
+           Are you sure you want to delete the task? </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        If you confirm the action, the task will be deleted permanently
+        </Modal.Body>
+        <Modal.Footer>
+          <Button className={btnStyles.Button} variant="secondary" onClick={handleClose} >
+          Cancel
+          </Button>
+          <Button className={`${btnStyles.Button} ml-2`} onClick={handleDelete}>YES</Button>
+        </Modal.Footer>
+      </Modal>
+      )}
     </Container>
   );
 }
