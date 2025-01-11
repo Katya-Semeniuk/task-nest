@@ -73,7 +73,7 @@ export const ProfileDetail = ({ userData }) => {
           <IoMdArrowRoundBack />
           Go back
         </button>
-        <Card className={styles.Card}>
+       {tasks ?  (<Card className={styles.Card}>
           {is_owner && (
             <div className={styles.ButtonWrapper}>
               <button type="button" className={styles.ButtonEl} onClick={handleEdit}>  <MdEdit /> </button>
@@ -133,7 +133,7 @@ export const ProfileDetail = ({ userData }) => {
             )}
           </Card.Text>
         </Card.Body>
-      </Card>
+      </Card>) : <Card.Text >It looks like there is no user data</Card.Text >}
       {show && (
         <Modal
         className={styles.Modal}

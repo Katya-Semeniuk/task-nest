@@ -28,3 +28,14 @@ align-items: center;
     color: #3e85f3;
     text-align: center;
 }
+
+.Btn{
+  max-width: 180px;
+  padding: 10px 15px;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
