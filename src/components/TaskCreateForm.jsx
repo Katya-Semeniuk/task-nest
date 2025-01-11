@@ -6,6 +6,7 @@ import btnStyles from "../styles/Button.module.css";
 import { MdOutlineLibraryAdd } from "react-icons/md";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useRedirect } from "../hooks/useRedirect";
+import { useCurrentUser } from "../contexts/CurrentUserContext";
 
 
 import { axiosReq } from "../api/axiosDefault";
@@ -13,6 +14,9 @@ import { useHistory } from "react-router";
 
 function TaskCreateForm() {
   useRedirect('loggedOut');
+
+  const currentUser = useCurrentUser();
+  const currentUserId = currentUser?.profile_id;
 
   const history = useHistory();
   
@@ -101,10 +105,14 @@ function TaskCreateForm() {
     console.log(" assigned_to in handleMultiSelect",  selectedOptions);
   };
 
+
+  // A query for all users, then select from the assigned
   const fetchAllUsers = async () => {
     try {
       const { data } = await axiosReq.get("/profiles/");
-      setAssignedUsers(data.results);
+    //  filter the array so that the current user cannot assign himself
+      const filteredUsers = data.results.filter((user) => user.id !== currentUserId);
+      setAssignedUsers(filteredUsers);
     } catch (err) {
       console.log(err);
       if (err.response?.status !== 200) {

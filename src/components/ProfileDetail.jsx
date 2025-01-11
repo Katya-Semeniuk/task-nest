@@ -17,7 +17,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FcRight } from "react-icons/fc";
 
 import { MdDeleteOutline} from "react-icons/md";
-import { MdEdit } from "react-icons/md";
+
 
 
 
@@ -62,9 +62,6 @@ export const ProfileDetail = ({ userData }) => {
   };
 
 
-  const handleEdit = () => {
-    history.push(`/profiles/${id}/edit`);
-  };
 
   const handleDelete = async () => {
     const handleSignOut = async () => {
@@ -98,8 +95,6 @@ export const ProfileDetail = ({ userData }) => {
        {tasks ?  (<Card className={styles.Card}>
           {is_owner && (
             <div className={styles.ButtonWrapper}>
-              <button type="button" className={styles.ButtonEl} onClick={handleEdit}>  <MdEdit /> </button>
-            
               <button type="button" className={styles.ButtonEl} onClick={handleShow}><MdDeleteOutline /></button>
             </div>
           )}

@@ -129,7 +129,7 @@ function TaskDetail(props) {
                       <>
                        
                         {assigned_users.map((user) => (
-                          <Link key={user.id}>
+                          <Link key={user.id} to={`/profiles/${user.id}`}>
                             <span className={styles.StyledLink}>
                               {user.username}
                             </span>
