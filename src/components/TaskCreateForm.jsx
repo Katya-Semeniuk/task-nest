@@ -33,6 +33,7 @@ function TaskCreateForm() {
     status: "not-started",
     assigned_to: [],
   });
+  
 
   useEffect(() => {
     fetchAllUsers();
@@ -68,18 +69,8 @@ function TaskCreateForm() {
     formData.append("priority", priority);
     formData.append("category", category);
     formData.append("status", status);
-    formData.append("assigned_to", assigned_to);
-    
-    if (Array.isArray(assigned_to)) {
-      assigned_to.forEach((item, index) => {
-        console.log(`Element ${index}:`, item, "| Type:", typeof item);
-      });
-    }
-    
+    formData.append("assigned_to", assigned_to.length > 0 ? assigned_to : []);
 
-    for (let pair of formData.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);  
-    }
     
     try {
       const { data } = await axiosReq.post("/tasks/", formData);
