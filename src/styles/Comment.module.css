@@ -1,9 +1,11 @@
 
 
 .Owner{
-    color: red;
+    margin-right: 8px;
 }
 
 .Date{
-    color: pink;
+    
+    font-weight: lighter;
+    color: #c1c1c5;
 }

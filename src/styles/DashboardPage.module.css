@@ -1,0 +1,30 @@
+.Box {
+    padding: 15px;
+display: flex;
+flex-direction: row;
+gap: 40px;
+align-items: center;
+
+}
+@media screen and (max-width:780px) {
+    .Box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    
+    }
+}
+
+.Title {
+    color: #FA4A0C;
+    text-align: center;
+  }
+.Text {
+  color: black;
+}
+
+.Subtitle{
+    color: #3e85f3;
+    text-align: center;
+}

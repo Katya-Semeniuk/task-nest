@@ -10,6 +10,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FcRight } from "react-icons/fc";
 import {useCurrentUser} from "../contexts/CurrentUserContext";
 import { MdDeleteOutline} from "react-icons/md";
+import { MdEdit } from "react-icons/md";
 import { axiosRes } from "../api/axiosDefault";
 
 
@@ -50,6 +51,11 @@ export const ProfileDetail = ({ userData }) => {
     console.log("toggleShowTaskList", showTaskList)
   };
 
+
+  const handleEdit = () => {
+    history.push(`/profiles/${id}/edit`);
+  };
+
    const handleDelete = async () => {
       try {
         await axiosRes.delete(`/tasks/${id}/`);
@@ -70,6 +76,8 @@ export const ProfileDetail = ({ userData }) => {
         <Card className={styles.Card}>
           {is_owner && (
             <div className={styles.ButtonWrapper}>
+              <button type="button" className={styles.ButtonEl} onClick={handleEdit}>  <MdEdit /> </button>
+            
               <button type="button" className={styles.ButtonEl} onClick={handleShow}><MdDeleteOutline /></button>
             </div>
           )}

@@ -13,6 +13,7 @@ import TasksPage from "./pages/tasks/TasksPage";
 import AssignedPage from "./pages/tasks/AssignedPage";
 import ProfilesPage from "./pages/profile/ProfilesPage";
 import ProfilePage from "./pages/profile/ProfilePage";
+import ProfileEditPage from "./pages/profile/ProfileEditPage";
 import StausFilterPage from "./pages/tasks/StausFilterPage";
 
 import "./api/axiosDefault";
@@ -29,6 +30,7 @@ function App() {
           <Route exact path="/signup" render={() => <SignUp />} />
           <Route exact path="/profiles" render={() => <ProfilesPage />} />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
+          <Route exact path="/profiles/:id/edit" render={() => <ProfileEditPage />} />
           <Route exact path="/tasks" render={() => <TasksPage />} />
           <Route exact path="/assigned" render={() => <AssignedPage />} />
           <Route exact path="/tasks/create" render={() => <TaskCreatePage />} />

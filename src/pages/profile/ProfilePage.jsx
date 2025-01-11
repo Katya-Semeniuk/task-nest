@@ -9,7 +9,7 @@ export const ProfilePage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { id } = useParams();
  
-
+console.log(userData)
   useEffect(() => {
     const fetchUserData = async () => {
       try {
