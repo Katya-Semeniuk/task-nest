@@ -1,33 +1,43 @@
 import React, { useState, useEffect } from "react";
-import Avatar from "./Avatar";
 import {  useHistory } from "react-router";
-import { Card, Container , Modal, Button} from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Avatar from "./Avatar";
+
+import { Card, Container , Modal, Button} from "react-bootstrap";
+
 import styles from "../styles/ProfileDetail.module.css";
 import btnStyles from "../styles/Button.module.css";
+
+import {useCurrentUser,  useSetCurrentUser,} from "../contexts/CurrentUserContext";
+import { axiosRes } from "../api/axiosDefault";
+import axios from "axios";
+
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FcRight } from "react-icons/fc";
-import {useCurrentUser} from "../contexts/CurrentUserContext";
+
 import { MdDeleteOutline} from "react-icons/md";
 import { MdEdit } from "react-icons/md";
-import { axiosRes } from "../api/axiosDefault";
+
 
 
 
 export const ProfileDetail = ({ userData }) => {
+  // modal window functions
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const { owner, created_at, tasks, tasks_count,  image, id } = userData;
   
   const history = useHistory();
- 
-  const { owner, created_at, tasks, tasks_count,  image, id } = userData;
-
+  
   const currentUser = useCurrentUser();
-
+  const setCurrentUser = useSetCurrentUser();
+ 
   const is_owner = currentUser?.username === owner;
 
+// states for storing tasks by status
   const [completeTask, setCompleteTasks] = useState([]);
   const [inProgressTask, setInProgressTasks] = useState([]);
   const [notStartedTask, setNotStartedTasks] = useState([]);
@@ -56,15 +66,27 @@ export const ProfileDetail = ({ userData }) => {
     history.push(`/profiles/${id}/edit`);
   };
 
-   const handleDelete = async () => {
+  const handleDelete = async () => {
+    const handleSignOut = async () => {
       try {
-        await axiosRes.delete(`/tasks/${id}/`);
-        handleClose();
-        history.goBack();
+        await axios.post("dj-rest-auth/logout/");
+        setCurrentUser(null); 
+        history.push('/'); 
       } catch (err) {
-        console.log(err);
+        console.log("Error during sign out:", err);
       }
     };
+  
+    try {
+      // delete profile
+      await axiosRes.delete(`/profiles/${id}/`);
+      handleSignOut(); 
+      handleClose(); 
+    } catch (err) {
+      console.log("Error during profile deletion:", err);
+    }
+  };
+  
 
   return (
     <Container>

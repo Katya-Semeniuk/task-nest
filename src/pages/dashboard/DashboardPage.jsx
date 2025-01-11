@@ -4,7 +4,7 @@ import btnStyles from "../../styles/Button.module.css"
 
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
-import { Container, Card, Alert, Button } from "react-bootstrap";
+import { Container, Card, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { LuFilePlus2 } from "react-icons/lu";
 
