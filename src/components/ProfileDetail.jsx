@@ -17,6 +17,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FcRight } from "react-icons/fc";
 
 import { MdDeleteOutline} from "react-icons/md";
+import { MdEditSquare } from "react-icons/md";
 
 
 
@@ -36,6 +37,7 @@ export const ProfileDetail = ({ userData }) => {
   const setCurrentUser = useSetCurrentUser();
  
   const is_owner = currentUser?.username === owner;
+  
 
 // states for storing tasks by status
   const [completeTask, setCompleteTasks] = useState([]);
@@ -61,7 +63,9 @@ export const ProfileDetail = ({ userData }) => {
     console.log("toggleShowTaskList", showTaskList)
   };
 
-
+  const handleEdit = (id) => {
+    history.push(`/profiles/${id}/edit`);
+  };
 
   const handleDelete = async () => {
     const handleSignOut = async () => {
@@ -95,6 +99,7 @@ export const ProfileDetail = ({ userData }) => {
        {tasks ?  (<Card className={styles.Card}>
           {is_owner && (
             <div className={styles.ButtonWrapper}>
+              <button type="button" className={styles.ButtonEl} onClick={()=> {handleEdit(currentUser.profile_id)}}><MdEditSquare /></button>
               <button type="button" className={styles.ButtonEl} onClick={handleShow}><MdDeleteOutline /></button>
             </div>
           )}
@@ -128,14 +133,14 @@ export const ProfileDetail = ({ userData }) => {
             </div>
           </div>
 
-          <Card.Text className="mt-4">
+          <Card.Text className="mt-5">
             {tasks && tasks.length > 0 ? (
               <>
                 <button type="button" onClick={toggleShowTaskList} className={`${btnStyles.Button} ${btnStyles.Dark} d-block ml-auto mr-auto`}>
                   {showTaskList ? (<> Close  <IoIosCloseCircleOutline /></>) : "Watch all tasks"} 
                 </button>
                 {showTaskList && (
-                  <div className="mt-2">
+                  <div className="mt-3">
                   {tasks.map((task) => (
                     <Link key={task.id} to={`/tasks/${task.id}`} className={styles.StyledLink}>
                       {task.title} <FcRight/>
@@ -146,7 +151,15 @@ export const ProfileDetail = ({ userData }) => {
                
               </>
             ) : (
-              <span>No tasks</span>
+              <div className="d-flex justify-content-center"> <span >You don't have any tasks yet</span>
+              <Link to={'/tasks/create'} >
+              <Button
+              className={`${btnStyles.Button} ml-4`}
+            >
+              Сreate your first task
+            </Button></Link>
+             </div>
+             
             )}
           </Card.Text>
         </Card.Body>
